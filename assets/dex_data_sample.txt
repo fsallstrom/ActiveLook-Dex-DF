@@ -1,0 +1,4 @@
+[{Value=>96, Trend=>FortyFiveDown, WT=>Date(1683231257000), DT=>Date(1683231257000+0200), ST=>Date(1683231257000)}, {ResponseCode=>200, Server=>0, SessionID=>e19a5151-5631-472b-97f6-23bc3089228a}]
+
+2023-05-06 13:08
+[{Value=>150, Trend=>FortyFiveUp, WT=>Date(1683371059000), DT=>Date(1683371059000+0200), ST=>Date(1683371059000)}, {ResponseCode=>200, Server=>0, SessionID=>0f94a39e-2fc8-4e1d-9911-1c5bf461d3a8}]
