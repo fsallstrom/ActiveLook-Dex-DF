@@ -7,9 +7,10 @@ DEVICES_PATH="${HOME}/Library/Application Support/Garmin/ConnectIQ/Devices"
 DEVICES="$(grep -F '<iq:product id="' "${RDIR}/../manifest.xml" | grep -oE '"[^"]*"' | tr -d '"')"
 
 
-printf "LAUNCHER_ICON_W;LAUNCHER_ICON_H;RESOLUTION_W;RESOLUTION_H;MIN_IQ_VERSION;MAX_IQ_VERSION;MEMORY_LIMIT;DEVICE\n"
+printf "LAUNCHER_ICON_W;LAUNCHER_ICON_H;RESOLUTION_W;RESOLUTION_H;MIN_IQ_VERSION;MAX_IQ_VERSION;MEMORY_LIMIT_DF;MEMORY_LIMIT_BG;DEVICE\n"
 for DEVICE in ${DEVICES} ; do
-    MEMORY_LIMIT="$(grep -F -B 1 '"type": "datafield"' "${DEVICES_PATH}/${DEVICE}/compiler.json" | head -n 1 | sed -e 's/[^0-9]//g')"
+    MEMORY_LIMIT_DF="$(grep -F -B 1 '"type": "datafield"' "${DEVICES_PATH}/${DEVICE}/compiler.json" | head -n 1 | sed -e 's/[^0-9]//g')"
+    MEMORY_LIMIT_BG="$(grep -F -B 1 '"type": "background"' "${DEVICES_PATH}/${DEVICE}/compiler.json" | head -n 1 | sed -e 's/[^0-9]//g')"
     IQ_VERSIONS="$(grep -F '"connectIQVersion"' "${DEVICES_PATH}/${DEVICE}/compiler.json" | sed -e 's/[^0-9.]//g' | sort -t. -k1,1n -k2,2n -k3,3n -u)"
     LAUNCHER_ICON="$(grep -A 2 '"launcherIcon"' "${DEVICES_PATH}/${DEVICE}/compiler.json")"
     RESOLUTION="$(grep -A 2 '"resolution"' "${DEVICES_PATH}/${DEVICE}/compiler.json")"
@@ -19,7 +20,7 @@ for DEVICE in ${DEVICES} ; do
     LAUNCHER_ICON_H="$(printf "${LAUNCHER_ICON}" | grep -F '"height' | sed -e 's/[^0-9.]//g')"
     RESOLUTION_W="$(printf "${RESOLUTION}" | grep -F '"width' | sed -e 's/[^0-9.]//g')"
     RESOLUTION_H="$(printf "${RESOLUTION}" | grep -F '"height' | sed -e 's/[^0-9.]//g')"
-    printf "${LAUNCHER_ICON_W};${LAUNCHER_ICON_H};${RESOLUTION_W};${RESOLUTION_H};${MIN_IQ_VERSION};${MAX_IQ_VERSION};${MEMORY_LIMIT};${DEVICE}\n"
+    printf "${LAUNCHER_ICON_W};${LAUNCHER_ICON_H};${RESOLUTION_W};${RESOLUTION_H};${MIN_IQ_VERSION};${MAX_IQ_VERSION};${MEMORY_LIMIT_DF};${MEMORY_LIMIT_BG};${DEVICE}\n"
 done
 
 exit 0
