@@ -3,7 +3,8 @@ set -e
 
 RDIR="$(dirname "${0}")"
 
-DEVICES_PATH="${HOME}/Library/Application Support/Garmin/ConnectIQ/Devices"
+#DEVICES_PATH="${HOME}/Library/Application Support/Garmin/ConnectIQ/Devices"
+DEVICES_PATH="${HOME}\AppData\Roaming\Garmin\ConnectIQ\Devices"
 DEVICES="$(grep -F '<iq:product id="' "${RDIR}/../manifest.xml" | grep -oE '"[^"]*"' | tr -d '"')"
 
 
