@@ -5,6 +5,7 @@ using Toybox.Lang;
 using Toybox.System;
 using Toybox.WatchUi;
 using Toybox.AntPlus;
+using Toybox.Time;
 
 using ActiveLookSDK;
 using ActiveLook.AugmentedActivityInfo;
@@ -215,11 +216,21 @@ class DataFieldDrawable extends WatchUi.Drawable {
             dc.drawText(midX, midY / 4, Graphics.FONT_XTINY, "ActiveLook", justify); // (50%, 15%)
             dc.drawText(midX, midY, Graphics.FONT_XTINY, self.updateMsg, justify); // (50%, 60%)
         }else {
-            dc.drawText(midX, midY / 4, Graphics.FONT_XTINY, "ActiveLook", justify); // (50%, 15%)
+            //dc.drawText(midX, midY / 4, Graphics.FONT_XTINY, "ActiveLook", justify); // (50%, 15%) //fresal debug
+            dc.drawText(midX, midY / 4, Graphics.FONT_XTINY, "ActiveLook Dex", justify); // (50%, 15%) 
             var font = WatchUi.loadResource(Rez.Fonts.alfont) as Graphics.FontType;
             if (!ActiveLookSDK.isReady()) {
                 // status: 5 = not connected
-                dc.drawText(midX, midY, font, "5", justify); // (50%, 60%)
+                //dc.drawText(midX, midY, font, "5", justify); // (50%, 60%)
+                dc.drawText(midX, dc.getHeight() / 2, font, "5", justify); // (50%, 50%) //fresal debug
+                var _bgStr = "";
+                //var _dexStr = "";
+                var _elapsedMinutes = "";
+                if (dexData.bg_mgdl > 0) { _bgStr = dexData.bg_mmol + " mmol"; } else { _bgStr = "--"; }
+                if (dexData.sampleTime != null) { _elapsedMinutes = (Math.floor(Time.now().subtract(dexData.sampleTime).value() / 60)).toString() + " min"; } else { _elapsedMinutes = "";} 
+                //_dexStr = _bgStr + "  " + _elapsedMinutes;
+                dc.drawText(midX, dc.getHeight() * 3/4, Graphics.FONT_XTINY, _bgStr + "  " + _elapsedMinutes, justify);
+
             } else {
                 // status: 4 = connected
                 dc.drawText(midX / 2, midY, font, "4", justify); // (25%, 60%)

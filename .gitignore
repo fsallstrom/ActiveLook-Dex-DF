@@ -8,3 +8,7 @@ bin/mir/source/ActiveLookDataFieldApp.mir
 bin/mir/source/ActiveLookDataFieldView.mir
 bin/mir/source/ActiveLookSDK_next.mir
 bin/mir/source/Laps.mir
+.DS_Store
+bin/mir/source/ActiveLook.mir
+bin/mir/source/ActiveLookActivityInfo.mir
+bin/mir/source/ActiveLookDataFieldView.mir
