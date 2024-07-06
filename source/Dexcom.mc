@@ -45,7 +45,8 @@ class DexcomData {
 
             if ((data.size()>0) && data[0].hasKey("Value") && data[0]["Value"] != null) { 
     			self.bg_mgdl = data[0]["Value"].toNumber();
-    			self.bg_mmol = (self.bg_mgdl.toFloat() / 18).format("%.1f");	
+    			//self.bg_mmol = (self.bg_mgdl.toFloat() / 18).format("%.1f");
+				self.bg_mmol = (self.bg_mgdl.toFloat() / 18.0); //frsal 	
     		}
 
             if ((data.size()>0) && data[0].hasKey("Trend") && data[0]["Trend"] != null) { 
@@ -131,7 +132,6 @@ class dexDFBG extends Toybox.System.ServiceDelegate {
 
     function onTemporalEvent() {
         System.println("In onTemporalEvent"); //debug
-        //Background.exit([{"Value"=>150, "Trend"=>"FortyFiveUp", "WT"=>"Date(1683371059000)", "DT"=>"Date(1683371059000+0200)", "ST"=>"Date(1683371059000)"}, {"ResponseCode"=>200, "Server"=>0, "SessionID"=>"0f94a39e-2fc8-4e1d-9911-1c5bf461d3a8"}]);
 
         m_nrRetries = 0;
 

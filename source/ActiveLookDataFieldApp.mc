@@ -10,6 +10,7 @@ class ActiveLookDataFieldApp extends Application.AppBase {
     var inBackground = false;
 
     function initialize() {
+        System.println("initiating dexData");
         dexData = new DexcomData();
         AppBase.initialize();
     }

@@ -8,7 +8,7 @@ DEVICES_PATH="${HOME}\AppData\Roaming\Garmin\ConnectIQ\Devices"
 DEVICES="$(grep -F '<iq:product id="' "${RDIR}/../manifest.xml" | grep -oE '"[^"]*"' | tr -d '"')"
 
 
-printf "LAUNCHER_ICON_W;LAUNCHER_ICON_H;RESOLUTION_W;RESOLUTION_H;MIN_IQ_VERSION;MAX_IQ_VERSION;MEMORY_LIMIT_DF;MEMORY_LIMIT_BG;DEVICE\n"
+CON_W;LAUNCHER_ICON_H;RESOLUTION_W;RESOLUTION_H;MIN_IQ_VERSION;MAX_IQ_VERSION;MEMORY_LIMIT_DF;MEMORY_LIMIT_BG;DEVICE\n"
 for DEVICE in ${DEVICES} ; do
     MEMORY_LIMIT_DF="$(grep -F -B 1 '"type": "datafield"' "${DEVICES_PATH}/${DEVICE}/compiler.json" | head -n 1 | sed -e 's/[^0-9]//g')"
     MEMORY_LIMIT_BG="$(grep -F -B 1 '"type": "background"' "${DEVICES_PATH}/${DEVICE}/compiler.json" | head -n 1 | sed -e 's/[^0-9]//g')"

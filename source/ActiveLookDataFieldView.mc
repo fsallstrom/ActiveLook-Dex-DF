@@ -217,14 +217,16 @@ class DataFieldDrawable extends WatchUi.Drawable {
             dc.drawText(midX, midY, Graphics.FONT_XTINY, self.updateMsg, justify); // (50%, 60%)
         }else {
             //dc.drawText(midX, midY / 4, Graphics.FONT_XTINY, "ActiveLook", justify); // (50%, 15%) //fresal debug
-            dc.drawText(midX, midY / 4, Graphics.FONT_XTINY, "ActiveLook Dex", justify); // (50%, 15%) 
+            dc.drawText(midX, midY / 4, Graphics.FONT_XTINY, "AL DEX", justify); // (50%, 15%) 
+            System.println("activeLookDatFieldView, Line 221"); //frsal
             var font = WatchUi.loadResource(Rez.Fonts.alfont) as Graphics.FontType;
+            System.println("activeLookDatFieldView, Line 223"); //frsal
             if (!ActiveLookSDK.isReady()) {
                 // status: 5 = not connected
                 //dc.drawText(midX, midY, font, "5", justify); // (50%, 60%)
                 dc.drawText(midX, dc.getHeight() / 2, font, "5", justify); // (50%, 50%) //fresal debug
+                
                 var _bgStr = "";
-                //var _dexStr = "";
                 var _elapsedMinutes = "";
                 if (dexData.bg_mgdl > 0) { _bgStr = dexData.bg_mmol + " mmol"; } else { _bgStr = "--"; }
                 if (dexData.sampleTime != null) { _elapsedMinutes = (Math.floor(Time.now().subtract(dexData.sampleTime).value() / 60)).toString() + " min"; } else { _elapsedMinutes = "";} 
@@ -245,6 +247,7 @@ class DataFieldDrawable extends WatchUi.Drawable {
                         : "3";
                     dc.drawText(midX * 3 / 2, midY, font, batteryStr, justify); // (75%, 60%)
                 }
+                //frsal add dexcom here 
             }
         }
     }
@@ -312,6 +315,8 @@ class ActiveLookDataFieldView extends WatchUi.DataField {
         if (System.getDeviceSettings().is24Hour == false && hour > 12) {
             hour = hour - 12;
         }
+        
+        //if (true) { //frsal testing
         if (ActiveLookSDK.isReady()) {
             log("compute::updateFields  ", [self.__heart_count]);
             $.updateFields();

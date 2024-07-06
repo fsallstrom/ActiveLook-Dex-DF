@@ -189,7 +189,7 @@ The project is composed of the following files:
     - `ActiveLookDataFieldApp.mc`\
       Stub generated automatically
 
-    - `ActiveLookDataFieldView.m`\
+    - `ActiveLookDataFieldView.mc`\
       It is the main entrypoint to the datafield.
 
       It defines, among other things, the `ActiveLookDataFieldView` class.

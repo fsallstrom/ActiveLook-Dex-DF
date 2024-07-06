@@ -26,6 +26,7 @@ module ActiveLook {
         var currentPace as Lang.Float?;
         var fastestPace as Lang.Float?;
         var averagePace as Lang.Float?;
+        var glucose as Lang.Float?; //frsal added metric for blood glucose
 
         var __pSamples as Lang.Array<Lang.Float> = [];
         var __pAccu as Lang.Float = 0.0;
@@ -55,6 +56,7 @@ module ActiveLook {
             currentPace = null;
             fastestPace = null;
             averagePace = null;
+            glucose = null; //frsal
             __pSamples = [];
             __pAccu = 0.0;
             __pAccuNb = 0;
@@ -204,6 +206,14 @@ module ActiveLook {
                 averageAscentSpeed = (__asSamples[tmp] - __asSamples[0]).toFloat() / tmp;
             } else if (tmpValid == 1) {
                 averageAscentSpeed = __asSamples[0].toFloat();
+            }
+
+            // Dexcom glucose reading
+            // Adding glucose to the 'threeSecPower metric'. ToDo: add a 'glucose' metric for glucose readings
+            if (dexData != null && dexData.bg_mmol != null && dexData.bg_mmol.toFloat() > 0.0) {
+                //threeSecPower = bgStr.toFloat();
+                threeSecPower = dexData.bg_mmol;
+                System.println("in compute: 3secPower: " + threeSecPower);
             }
         }
 
@@ -567,12 +577,19 @@ module ActiveLook {
             var tmp = "-";
             var sep = null;
 
+            //frsal debug
+            System.println("in toSizedString: value = " + value + " | textAlignright = " + textAlignRight);
+
             if (value != null) {
                 tmp = value.toString();
                 sep = tmp.find(".");
+                
+                //frsal debug
+                System.println("in toSizedString: tmp = " + tmp);
+                
                 if (sep != null) {
 		            if(sep == 1) {
-		                tmp = value.format("%.2f");
+		                tmp = value.format("%.2f"); //crashes here
 		            }else if(sep == 2){
 						tmp = value.format("%.1f");
 		            }else{

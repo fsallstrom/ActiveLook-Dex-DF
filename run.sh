@@ -2,7 +2,7 @@
 set -e
 
 RDIR="$(dirname "${0}")"
-JAVA_HOME=$(/usr/libexec/java_home -v1.8)
+#JAVA_HOME=$(/usr/libexec/java_home -v1.8)
 CIQ_PATH="$(cat ${HOME}/Library/Application\ Support/Garmin/ConnectIQ/current-sdk.cfg)/bin"
 
 export PATH="${PATH}:${CIQ_PATH}"
